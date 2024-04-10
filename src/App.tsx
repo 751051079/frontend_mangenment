@@ -1,5 +1,5 @@
 import React from 'react';
-import Router from "@/router/index";
+import Router from "../src/router/index";
 import { HashRouter } from "react-router-dom";
 
 function App() {

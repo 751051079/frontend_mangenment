@@ -1,8 +1,8 @@
 import React from 'react'
-import { Navigate,useRoutes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import { RouteObject } from "./interface/index"
 
-import Login from "@/views/Login"
+import Login from "../../src/views/Login"
 
 // 主路管理
 export const appRouter: RouteObject[] = [
