@@ -1,5 +1,74 @@
 .login-page{
-    background-color: var(--primary-color);
+    background-color: #333;
     width: 100%;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form{
+    width: 400px;
+    height: 300px;
+    background-color: rgba(255,255,255,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    position: relative;
+}
+
+.login-btn-box{
+    width: 80px;
+    height: 40px;
+    position: relative;
+    margin-top: 25px;
+    color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 12px;
+}
+.login-btn-active-bg{
+    width: 90px;
+    height: 100%;
+    background-color: #19191b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: skewX(-25deg);
+    margin-left: -18px;
+}
+
+.login-btn-active{
+    background-color: #19191b !important;
+    width: 80px !important;
+}
+
+.login-btn-translation{
+    position: absolute;
+    display: flex;
+    width: 187px;
+    height: 40px;
+    transform: translate(-180px,0);
+    transition: all 1s;
+}
+
+.login-btn,.login-btn-active{
+    width: 100%;
+    height: 100%;
+    background-color: #3b3e46;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-btn-box:hover .login-btn-translation{
+    transform: translate(0,0);
+}
+.login-user-profile-picture{
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    position: absolute;
+    top: -30px;
 }

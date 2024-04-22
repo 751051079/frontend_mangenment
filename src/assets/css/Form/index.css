@@ -1,0 +1,39 @@
+.input-group{
+    width: 300px;
+    display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 40px;
+}
+
+.input-group label{
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f7fa;
+    color: #909399;
+    border: 1px solid #dcdfe6;
+}
+
+.input-group input{
+    display: flex;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    flex: 1;
+    outline: none;
+    border: 0;
+}
+
+.input-group input:hover{
+    border: 1px solid #c0c4cc;
+}
+
+.input-group input:focus{
+    border: 1px solid #409eff;
+}
+
+.input-group img{
+    cursor: pointer;
+    width: 70px;
+}
