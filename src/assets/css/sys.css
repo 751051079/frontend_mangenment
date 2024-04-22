@@ -1,0 +1,28 @@
+:root {
+    --primary-color-light: #ffffff;
+    /* 亮色主题的主要颜色 */
+    --background-color-light: #1a1a1a;
+    /* 亮色主题的背景颜色 */
+    --primary-color-dark: #333333;
+    /* 暗色主题的主要颜色 */
+    --background-color-dark: #f5f5f5;
+    /* 暗色主题的背景颜色 */
+}
+
+.app {
+    --primary-color: var(--primary-color-light);
+    --background-color: var(--background-color-light);
+}
+
+.app.dark {
+    --primary-color: var(--primary-color-dark);
+    --background-color: var(--background-color-dark);
+}
+
+button {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+}
