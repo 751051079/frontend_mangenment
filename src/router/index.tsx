@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRoutes } from "react-router-dom";
+import { useRoutes,Navigate } from "react-router-dom";
 import { RouteObject } from "./interface/index"
 
 import Login from "../views/Login"
@@ -8,9 +8,10 @@ import Home from '../views/Home';
 
 // 主路管理
 export const appRouter: RouteObject[] = [
+    { path: "/", element: <Navigate to="/login" replace /> },
     { path: "/login", meta: { title: "登录" }, element: <Login /> },
     {
-        path: "/",
+        path: "/layout",
         element: <Layout />,
         children: [
             {

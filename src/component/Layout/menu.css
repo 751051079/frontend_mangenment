@@ -1,0 +1,35 @@
+a{
+    color: #b2b8be;
+    text-decoration: none;
+    transition: all .3s;
+}
+
+a:hover{
+    color: #fff;
+}
+
+.nav-item{
+    width: 100%;
+    cursor: pointer;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item li a{
+    min-height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.nav-item li:active .nav-item{
+    height: auto;
+}
+
+.nav-item li .nav-item{
+    height: 0;
+}
+/* .nav-item ul li {
+    height: 0;
+} */
