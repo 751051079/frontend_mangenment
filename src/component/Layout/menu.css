@@ -23,10 +23,6 @@ a:hover{
     justify-content: center;
 }
 
-.nav-item li:active .nav-item{
-    height: auto;
-}
-
 .nav-item li .nav-item{
     height: 0;
 }

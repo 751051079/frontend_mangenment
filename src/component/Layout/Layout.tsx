@@ -42,7 +42,7 @@ const Layout: React.FC = () => {
             <div style={{ width: '200px', backgroundColor: '#2c2e2f' }}>
                 <Menu items={menuItems} />
             </div>
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: 1 ,backgroundColor:'#f2f2f2'}}>
                 <Outlet />
             </div>
         </div>

@@ -11,11 +11,11 @@ export const appRouter: RouteObject[] = [
     { path: "/", element: <Navigate to="/login" replace /> },
     { path: "/login", meta: { title: "登录" }, element: <Login /> },
     {
-        path: "/layout",
+        path: "/layout/",
         element: <Layout />,
         children: [
             {
-                path: "home", element: <Home />, meta: { title: "首页" }
+                path: "", element: <Home />, meta: { title: "首页" }
             }
         ]
     },

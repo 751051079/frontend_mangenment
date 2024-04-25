@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Collapse from '../component/Collapse/Collapse';
+import Panel from '../component/Collapse/Panel';
 
 const Home: React.FC = () => {
-  const [count, setCount] = useState(0);
 
-  const increment = () => {
-    setCount(prevCount => prevCount + 1);
-  };
+    return (
+        <div style={{width:'98%',marginLeft:'1%',marginTop:'10px'}}>
+            <div style={{ width: '400px' }}>
+                <Collapse
+                    defaultActiveKey={[0]}
+                    onChange={(key: number) => {
+                        // console.log(`面板 ${key} 被展开了`);
+                    }}
+                >
+                    <Panel header="按钮">
+                        <div style={{ padding: '15px' }}>
+                            <div className='btn glow-btn glow-btn-primary'>提交</div>
+                        </div>
+                    </Panel>
+                    <Panel header="面板标题2">
+                        <p>面板内容2</p>
+                    </Panel>
+                </Collapse>
+            </div>
 
-  const decrement = () => {
-    setCount(prevCount => prevCount - 1);
-  };
 
-  return (
-    <div>
-      <h1>Counter: {count}</h1>
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
-    </div>
-  );
+        </div >
+    );
 };
 
 export default Home;
