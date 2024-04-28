@@ -1,0 +1,65 @@
+.custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 半透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-alert {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.custom-alert p {
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.custom-alert .button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.cancel-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.confirm-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.confirm-btn:hover {
+    background-color: #0056b3;
+}
+
+.custom-alert-title{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 10px;
+    font-weight: bold;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import StarBackground from '../component/LoginBackground/StarBackground';
-import EaskeyInput from '../component/Form/EaskeyInput';
-import '../assets/css/Login/index.css'
+import StarBackground from '@/component/LoginBackground/StarBackground';
+import EaskeyInput from '@/component/Form/EaskeyInput';
+import '@/assets/css/Login/index.css'
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -26,9 +26,12 @@ const Login = () => {
 
     const handleLogin = () => {
         // 在这里处理登录逻辑，比如发送登录请求到服务器
-        console.log('Username:', username);
-        console.log('Password:', password);
-        console.log('Captcha:', captchaInput);
+        if (!username) {
+            console.log(1)
+        }
+        // console.log('Username:', username);
+        // console.log('Password:', password);
+        // console.log('Captcha:', captchaInput);
     };
 
 
@@ -38,7 +41,7 @@ const Login = () => {
                 <img src={require('../assets/image/portrait.png')} alt="" className='login-user-profile-picture' />
                 <EaskeyInput style={{ marginTop: '60px' }} label='账号' type='text' value={username} onChange={handleUsernameChange} />
                 <EaskeyInput style={{ marginTop: '15px' }} label='密码' type='password' value={password} onChange={handlePasswordChange} />
-                <EaskeyInput style={{ marginTop: '15px' }} label='验证码' type='password' value={captchaInput} imgSrc={require('../assets/image/code.jpg')} onChange={handleCaptchaChange} onImgClick={handleClickImgCaptchaChange} />
+                <EaskeyInput style={{ marginTop: '15px' }} label='验证码' type='text' value={captchaInput} imgSrc={require('../assets/image/code.jpg')} onChange={handleCaptchaChange} onImgClick={handleClickImgCaptchaChange} />
                 <div className='login-btn-box' onClick={handleLogin}>
                     <div className='login-btn-translation'>
                         <div className='login-btn-active'>登录</div>
@@ -47,7 +50,6 @@ const Login = () => {
                     <div className='login-btn'>登录</div>
                 </div>
             </div>
-
             <StarBackground />
         </div>
     );

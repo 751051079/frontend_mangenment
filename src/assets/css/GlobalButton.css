@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: '黑体';
+}
+
+
+/************************************************************************        流光按钮公共样式 start        ************************************************************************/
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.glow-btn {
+    position: relative;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s ease-out;
+}
+
+.glow-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 40%, transparent 70%);
+    transition: all 0.5s ease-out;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.glow-btn:hover::before {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+}
+
+.disabled-btn {
+    pointer-events: none;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+/************************************************************************        流光按钮公共样式 start        ************************************************************************/
+
+
+
+
+
+/************************************************************************        流光按钮样式 start        ************************************************************************/
+
+.glow-btn-primary:active {
+    transform: scale(0.95);
+    background-color: #0056b3;
+}
+
+.glow-btn-primary {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    background-color: #007bff;
+    color: #fff;
+}
+
+.glow-btn-danger:active {
+    transform: scale(0.95);
+    background-color: #e31b1d;
+}
+
+.glow-btn-danger {
+    box-shadow: 0 0 10px rgba(255, 77, 79, 0.5);
+    background-color: #ff4d4f;
+    color: #fff;
+}
+
+.glow-btn-secondary:active {
+    transform: scale(0.95);
+    background-color: #5a6268;
+}
+
+.glow-btn-secondary {
+    box-shadow: 0 0 10px rgba(108, 117, 125, 0.5);
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.glow-btn-success:active {
+    transform: scale(0.95);
+    background-color: #218838;
+}
+
+.glow-btn-success {
+    box-shadow: 0 0 10px rgba(32, 136, 56, 0.5);
+    background-color: #28a745;
+    color: #fff;
+}
+
+.glow-btn-warning:active {
+    transform: scale(0.95);
+    background-color: #e0a800;
+}
+
+.glow-btn-warning {
+    box-shadow: 0 0 10px rgba(211, 158, 0, 0.5);
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.glow-btn-info:active {
+    transform: scale(0.95);
+    background-color: #138496;
+}
+
+.glow-btn-info {
+    box-shadow: 0 0 10px rgba(17, 122, 139, 0.5);
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+
+/************************************************************************        流光按钮样式 end        ************************************************************************/
+
+
+
+
+
+/************************************************************************        线性流光按钮样式 start        ************************************************************************/
+
+.outline-glow-btn-primary:active {
+    transform: scale(0.95);
+    background-color: #0056b3;
+}
+
+.outline-glow-btn-primary:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+.outline-glow-btn-primary {
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+    border: 1px solid #007bff;
+    color: #007bff;
+}
+
+.outline-glow-btn-danger:active {
+    transform: scale(0.95);
+    background-color: #e31b1d;
+}
+
+.outline-glow-btn-danger:hover {
+    background-color: #e31b1d;
+    color: #fff;
+}
+
+.outline-glow-btn-danger {
+    box-shadow: 0 0 4px rgba(255, 77, 79, 0.5);
+    border: 1px solid #ff4d4f;
+    color: #ff4d4f;
+}
+
+.outline-glow-btn-secondary:active {
+    transform: scale(0.95);
+    background-color: #5a6268;
+}
+
+.outline-glow-btn-secondary:hover {
+    background-color: #5a6268;
+    color: #fff;
+}
+
+.outline-glow-btn-secondary {
+    box-shadow: 0 0 4px rgba(108, 117, 125, 0.5);
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+
+.outline-glow-btn-success:active {
+    transform: scale(0.95);
+    background-color: #218838;
+}
+
+.outline-glow-btn-success:hover {
+    background-color: #218838;
+    color: #fff;
+}
+
+.outline-glow-btn-success {
+    box-shadow: 0 0 4px rgba(32, 136, 56, 0.5);
+    border: 1px solid #28a745;
+    color: #28a745;
+}
+
+.outline-glow-btn-warning:active {
+    transform: scale(0.95);
+    background-color: #e0a800;
+}
+
+.outline-glow-btn-warning:hover {
+    background-color: #e0a800;
+    color: #fff;
+}
+
+.outline-glow-btn-warning {
+    box-shadow: 0 0 4px rgba(211, 158, 0, 0.5);
+    border: 1px solid #ffc107;
+    color: #ffc107;
+}
+
+.outline-glow-btn-info:active {
+    transform: scale(0.95);
+    background-color: #138496;
+}
+
+.outline-glow-btn-info:hover {
+    background-color: #138496;
+    color: #fff;
+}
+
+.outline-glow-btn-info {
+    box-shadow: 0 0 4px rgba(17, 122, 139, 0.5);
+    border: 1px solid #17a2b8;
+    color: #17a2b8;
+}
+
+
+/************************************************************************        线性流光按钮样式 end        ************************************************************************/
