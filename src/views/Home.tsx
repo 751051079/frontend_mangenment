@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import Collapse from '@/component/Collapse/Collapse';
 import Panel from '@/component/Collapse/Panel';
 import CustomAlert from '@/component/CustomAlert/CustomAlert';
-import { Row, Col, Grid } from '@/component/Grid/Grid'; // 导入封装的组件
+import { Row, Col, Grid } from '@/component/Grid/Grid';
+import Message, { MessagesProps } from '@/component/Message/Message';
 
 const Home: React.FC = () => {
     const [showAlert, setShowAlert] = useState(false);
+    const [messages, setMessages] = useState<MessagesProps[]>([]);
+    const [nextId, setNextId] = useState(0);
 
     const handleAlert = () => {
         setShowAlert(true);
@@ -19,6 +22,16 @@ const Home: React.FC = () => {
     const handleConfirmAlert = async () => {
         console.log('点击了确认按钮');
         setShowAlert(false);
+    };
+
+    const handleAddMessage = (text: string, type: 'success' | 'danger' | 'warning' | 'info') => {
+        const newMessage = { id: nextId, text, type };
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+        setNextId((prevId) => prevId + 1);
+    };
+
+    const handleCloseMessage = (id: number) => {
+        setMessages((prevMessages) => prevMessages.filter((message) => message.id !== id));
     };
 
     return (
@@ -65,8 +78,15 @@ const Home: React.FC = () => {
 
                     <Panel header="弹窗">
                         <div style={{ padding: '15px' }}>
-                            <div className='btn glow-btn glow-btn-primary' onClick={handleAlert}>弹窗</div>
-
+                            <div className='btn glow-btn glow-btn-primary' onClick={handleAlert}>消息提示框</div>
+                        </div>
+                    </Panel>
+                    <Panel header="系统消息提示框">
+                        <div style={{ padding: '15px' }}>
+                            <div className='btn glow-btn glow-btn-success m-left-10' onClick={() => handleAddMessage('操作成功！', 'success')}>显示成功消息</div>
+                            <div className='btn glow-btn glow-btn-danger m-left-10' onClick={() => handleAddMessage('发生错误！', 'danger')}>显示错误消息</div>
+                            <div className='btn glow-btn glow-btn-warning m-left-10' onClick={() => handleAddMessage('提示警告！', 'warning')}>显示警告消息</div>
+                            <div className='btn glow-btn glow-btn-info m-left-10' onClick={() => handleAddMessage('发送信息。', 'info')}>显示提示消息</div>
                         </div>
                     </Panel>
                     <Panel header="栅格布局">
@@ -90,6 +110,7 @@ const Home: React.FC = () => {
                 </Collapse>
             </div>
             {showAlert && <CustomAlert message="这是一个消息弹窗" onConfirm={handleConfirmAlert} onCancel={handleCancelAlert} />}
+            {messages && <Message message={messages} onClose={handleCloseMessage} />}
         </div >
     );
 };
