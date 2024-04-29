@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Collapse from '@/component/Collapse/Collapse';
 import Panel from '@/component/Collapse/Panel';
 import CustomAlert from '@/component/CustomAlert/CustomAlert';
-
+import { Row, Col, Grid } from '@/component/Grid/Grid'; // 导入封装的组件
 
 const Home: React.FC = () => {
     const [showAlert, setShowAlert] = useState(false);
@@ -66,6 +66,24 @@ const Home: React.FC = () => {
                     <Panel header="弹窗">
                         <div style={{ padding: '15px' }}>
                             <div className='btn glow-btn glow-btn-primary' onClick={handleAlert}>弹窗</div>
+
+                        </div>
+                    </Panel>
+                    <Panel header="栅格布局">
+                        <div style={{ padding: '15px' }}>
+                            <Grid>
+                                <Row gutter={0} marginTop={10}>
+                                    <Col span={8} align='center'><div style={{ width: '100%', height: '50px', backgroundColor: '#1677ff', color: '#fff' }}>Column 1</div></Col>
+                                    <Col span={8} align='center'><div style={{ width: '100%', height: '50px', backgroundColor: '#1677ffbf', color: '#fff' }}>Column 2</div></Col>
+                                    <Col span={8} align='center'><div style={{ width: '100%', height: '50px', backgroundColor: '#1677ff', color: '#fff' }}>Column 3</div></Col>
+                                </Row>
+                                <Row gutter={0} marginTop={10}>
+                                    <Col span={6} align='center'><div style={{ width: '100%', height: '50px', backgroundColor: '#1677ff', color: '#fff' }}>Column 1</div></Col>
+                                    <Col span={6} align='center'><div style={{ width: '100%', height: '50px', backgroundColor: '#1677ffbf', color: '#fff' }}>Column 2</div></Col>
+                                    <Col span={6} align='center'><div style={{ width: '100%', height: '50px', backgroundColor: '#1677ff', color: '#fff' }}>Column 3</div></Col>
+                                    <Col span={6} align='center'><div style={{ width: '100%', height: '50px', backgroundColor: '#1677ffbf', color: '#fff' }}>Column 4</div></Col>
+                                </Row>
+                            </Grid>
 
                         </div>
                     </Panel>
