@@ -1,3 +1,46 @@
+/* 调整消息容器的样式，使消息垂直堆叠 */
+.message-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column-reverse;
+    /* 从底部往上堆叠 */
+    align-items: center;
+}
+
+/* 每条消息的样式 */
+.message {
+    position: relative;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 300px;
+    opacity: 0;
+    /* 初始状态为隐藏 */
+    animation: fadeInOut 5s ease forwards;
+    /* 添加动画效果 */
+}
+
+/* 消息文本的样式 */
+.message-text {
+    margin-right: 20px;
+}
+
+/* 关闭按钮的样式 */
+.close-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 18px;
+}
+
 .success {
     background-color: #d1e7dd;
     border-color: #a3cfbb;
@@ -22,40 +65,26 @@
     border-color: #e9ecef;
 }
 
-/* 调整消息容器的样式，使消息垂直堆叠 */
-.message-container {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-/* 每条消息的样式 */
-.message {
-    position: relative;
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    width: 300px;
-}
+/* 定义淡入淡出动画 */
+@keyframes fadeInOut {
+    0% {
+        opacity: 0.5;
+    }
 
-/* 消息文本的样式 */
-.message-text {
-    margin-right: 20px;
-}
+    10% {
+        opacity: 1;
+    }
 
-/* 关闭按钮的样式 */
-.close-button {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #555;
-    cursor: pointer;
-    font-size: 18px;
+    80% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }

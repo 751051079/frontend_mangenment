@@ -12,6 +12,7 @@
 1.Grid 栅格布局
 2.CustomAlert 弹窗
 3.Message 系统消息框
+4.LazyImage 懒加载图片
 
 ## 2024-04-28
 1.Button 流光样式
