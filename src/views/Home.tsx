@@ -5,12 +5,36 @@ import CustomAlert from '@/component/CustomAlert/CustomAlert';
 import { Row, Col, Grid } from '@/component/Grid/Grid';
 import Message, { MessagesProps } from '@/component/Message/Message';
 import LazyImage from '@/component/LazyImage/LazyImage';
-
+import EaskeyTable from '@/component/EaskeyTable/EaskeyTable';
 
 const Home: React.FC = () => {
     const [showAlert, setShowAlert] = useState(false);
     const [messages, setMessages] = useState<MessagesProps[]>([]);
     const [nextId, setNextId] = useState(0);
+
+    const columns = [
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+        },
+        {
+            title: 'Age',
+            dataIndex: 'age',
+            key: 'age',
+        },
+        {
+            title: 'Address',
+            dataIndex: 'address',
+            key: 'address',
+        },
+    ];
+
+    const dataSource = [
+        { key: '1', name: 'John Brown', age: 32, address: 'New York No. 1 Lake Park' },
+        { key: '2', name: 'Jim Green', age: 42, address: 'London No. 1 Lake Park' },
+        { key: '3', name: 'Joe Black', age: 32, address: 'Sidney No. 1 Lake Park' },
+    ];
 
     const handleAlert = () => {
         setShowAlert(true);
@@ -106,6 +130,12 @@ const Home: React.FC = () => {
                                     <Col span={6} align='center'><div style={{ width: '100%', height: '50px', backgroundColor: '#1677ffbf', color: '#fff' }}>Column 4</div></Col>
                                 </Row>
                             </Grid>
+
+                        </div>
+                    </Panel>
+                    <Panel header="表格">
+                        <div style={{ padding: '15px' }}>
+                            <EaskeyTable columns={columns} dataSource={dataSource}></EaskeyTable>
 
                         </div>
                     </Panel>

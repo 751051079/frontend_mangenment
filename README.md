@@ -8,6 +8,9 @@
 
 # 更新记录
 
+## 2024-04-30
+1.EaskeyTable 表格
+
 ## 2024-04-29
 1.Grid 栅格布局
 2.CustomAlert 弹窗
