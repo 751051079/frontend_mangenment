@@ -11,26 +11,6 @@ const Layout: React.FC = () => {
         {
             title: '首页',
             path: '',
-            children: [
-                {
-                    title: '子菜单1',
-                    path: '',
-                    children: [
-                        {
-                            title: '子菜单1-1',
-                            path: ''
-                        },
-                        {
-                            title: '子菜单1-2',
-                            path: ''
-                        }
-                    ]
-                },
-                {
-                    title: '子菜单2',
-                    path: ''
-                }
-            ]
         },
         {
             title: '关于',
@@ -42,7 +22,7 @@ const Layout: React.FC = () => {
             <div style={{ width: '200px', backgroundColor: '#2c2e2f' }}>
                 <Menu items={menuItems} />
             </div>
-            <div style={{ flex: 1 ,backgroundColor:'#f2f2f2'}}>
+            <div style={{ flex: 1 ,backgroundColor:'#f2f2f2',overflowY:'scroll'}}>
                 <Outlet />
             </div>
         </div>

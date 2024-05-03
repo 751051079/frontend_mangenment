@@ -6,11 +6,13 @@ import { Row, Col, Grid } from '@/component/Grid/Grid';
 import Message, { MessagesProps } from '@/component/Message/Message';
 import LazyImage from '@/component/LazyImage/LazyImage';
 import EaskeyTable from '@/component/EaskeyTable/EaskeyTable';
+import Modal from '@/component/Modal/Modal'
 
 const Home: React.FC = () => {
     const [showAlert, setShowAlert] = useState(false);
     const [messages, setMessages] = useState<MessagesProps[]>([]);
     const [nextId, setNextId] = useState(0);
+    const [isOpens,setIsOpens] = useState(false)
 
     const columns = [
         {
@@ -62,7 +64,7 @@ const Home: React.FC = () => {
 
     return (
         <div style={{ width: '98%', marginLeft: '1%', marginTop: '10px' }}>
-            <div style={{ width: '400px' }}>
+            <div>
                 <Collapse
                     defaultActiveKey={[0]}
                     onChange={(key: number) => {
@@ -105,6 +107,8 @@ const Home: React.FC = () => {
                     <Panel header="弹窗">
                         <div style={{ padding: '15px' }}>
                             <div className='btn glow-btn glow-btn-primary' onClick={handleAlert}>消息提示框</div>
+                            <div className='btn glow-btn glow-btn-primary' onClick={()=>setIsOpens(true)}>内容弹窗</div>
+                            
                         </div>
                     </Panel>
                     <Panel header="系统消息提示框">
@@ -153,6 +157,9 @@ const Home: React.FC = () => {
             </div>
             {showAlert && <CustomAlert message="这是一个消息弹窗" onConfirm={handleConfirmAlert} onCancel={handleCancelAlert} />}
             {messages && <Message message={messages} onClose={handleCloseMessage} />}
+            <Modal isOpen={isOpens} onClose={()=>setIsOpens(false)}>
+                <div>我是内容</div>
+            </Modal>
         </div >
     );
 };

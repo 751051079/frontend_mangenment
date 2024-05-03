@@ -10,13 +10,15 @@ interface PanelProps {
 interface CollapseProps {
     defaultActiveKey?: number[];
     onChange?: (key: number) => void;
-    children: React.ReactElement<PanelProps>[];
+    children: React.ReactElement<PanelProps>[] | React.ReactElement;
+    range?:string;
 }
 
 const Collapse: React.FC<CollapseProps> = ({
     defaultActiveKey = [0],
     onChange,
     children,
+    range,
 }) => {
     const [activeKeys, setActiveKeys] = useState<number[]>(defaultActiveKey);
 
@@ -44,6 +46,7 @@ const Collapse: React.FC<CollapseProps> = ({
                 content: child.props.children,
                 isActive: activeKeys.includes(index),
             }))}
+            ranges={range}
             onToggle={handlePanelChange}
         />
     );
