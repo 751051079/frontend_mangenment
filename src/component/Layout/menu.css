@@ -23,6 +23,10 @@ a:hover{
     justify-content: center;
 }
 
+.nav-item li a:hover{
+    background-color: #232526;
+}
+
 .nav-item li .nav-item{
     height: 0;
 }

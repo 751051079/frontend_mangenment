@@ -14,24 +14,42 @@
     background-color: rgba(0, 0, 0, 0.4);
     /* 半透明黑色背景 */
 }
-.modal-header{
+
+.modal-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background-color: #f8f8f8;
+    padding: 0 15px;
+    border-bottom: 1px solid #f0f0f0;
+    box-sizing: border-box;
 }
+
+.modal-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #f0f4f7;
+    padding: 5px 15px;
+    border-top: 1px #c7c7c7 solid;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    box-sizing: border-box;
+}
+
 .modal-content {
     background-color: #fefefe;
     /* 白色背景 */
     margin: 15% auto;
-    /* 使其居中 */
-    padding: 20px;
-    border: 1px solid #888;
     width: 80%;
     max-width: 600px;
     /* 最大宽度 */
-    border-radius: 8px;
+    border-radius: 4px;
     position: relative;
+    overflow: hidden;
     /* 相对定位 */
 }
 

@@ -1,10 +1,13 @@
 import React from 'react'
-import { useRoutes,Navigate } from "react-router-dom";
+import { useRoutes, Navigate } from "react-router-dom";
 import { RouteObject } from "./interface/index"
 
-import Login from "../views/Login"
-import Layout from '../component/Layout/Layout';
-import Home from '../views/Home';
+import Login from "@/views/Login"
+import Layout from '@/component/Layout/Layout';
+import Home from '@/views/Home';
+import CustomComponents from '@/views/CustomComponents/CustomComponents';
+import SysMenu from '@/views/sysMenu/SysMenu';
+
 
 // 主路管理
 export const appRouter: RouteObject[] = [
@@ -16,6 +19,12 @@ export const appRouter: RouteObject[] = [
         children: [
             {
                 path: "", element: <Home />, meta: { title: "首页" }
+            },
+            {
+                path: "customComponents", element: <CustomComponents />, meta: { title: "自定义组件" }
+            },
+            {
+                path:"SysMenu",element:<SysMenu/>,meta:{title:'菜单管理'}
             }
         ]
     },

@@ -4,6 +4,7 @@ import App from './App';
 import '@/assets/css/GlobalButton.css'
 import '@/assets/css/GlobalMarginPadding.css'
 import '@/assets/css/GlobalFontSize.css'
+import '@/assets/css/GlobalStyle.css'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

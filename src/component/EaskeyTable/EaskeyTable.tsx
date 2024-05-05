@@ -10,11 +10,12 @@ interface Column {
 interface Props {
     columns: Column[];
     dataSource: any[]; // 这里可以根据实际情况定义接口
+    style?:React.CSSProperties;
 }
 
-const EaskeyTable: React.FC<Props> = ({ columns, dataSource }) => {
+const EaskeyTable: React.FC<Props> = ({ columns, dataSource,style }) => {
     return (
-        <table>
+        <table style={style}>
             <thead>
                 <tr>
                     {columns.map(column => (
