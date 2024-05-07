@@ -8,8 +8,11 @@
 
 # 更新记录
 
+## 2024-05-07
+1.EaskeyFormInput 表单输入框
+
 ## 2024-05-05
-1.EaskeyFormRadio 单选框组
+1.EaskeyFormRadio 表单单选框组
 
 ## 2024-05-03
 1.Modal 内容弹窗

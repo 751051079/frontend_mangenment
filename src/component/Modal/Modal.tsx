@@ -5,7 +5,7 @@ interface ModalProps {
     isOpen: boolean;
     title?: string;
     onClose: () => void;
-    children: React.ReactElement
+    children: React.ReactElement | React.ReactElement[]
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, title = '标题', onClose, children }) => {
