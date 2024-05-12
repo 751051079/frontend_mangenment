@@ -8,6 +8,11 @@
 
 # 更新记录
 
+## 2024-05-13
+1.EaskeyPopover 弹出层
+2.IconGroup Icon图标组件
+3.EaskeyTable 新增传入DOM元素
+
 ## 2024-05-07
 1.EaskeyFormInput 表单输入框
 

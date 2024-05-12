@@ -1,6 +1,7 @@
 /* 调整消息容器的样式，使消息垂直堆叠 */
 .message-container {
     position: fixed;
+    z-index: 999;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);

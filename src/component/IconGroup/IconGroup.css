@@ -1,0 +1,15 @@
+.icon-group {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.icon {
+    margin: 10px;
+    font-size: 16px;
+    transition: transform .5s ease;
+}
+
+.icon:hover {
+    transform: rotate(360deg);
+}

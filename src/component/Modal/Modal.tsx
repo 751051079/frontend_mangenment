@@ -4,11 +4,12 @@ import './Modal.css'; // 导入样式文件
 interface ModalProps {
     isOpen: boolean;
     title?: string;
-    onClose: () => void;
-    children: React.ReactElement | React.ReactElement[]
+    onClose?: () => void;
+    onSubmit?: () => void;
+    children?: React.ReactElement | React.ReactElement[] | React.ReactNode | React.ReactNode[];
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, title = '标题', onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, title = '标题', onSubmit, onClose, children }) => {
     if (!isOpen) {
         return null;
     }
@@ -22,12 +23,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, title = '标题', onClose, childr
                         &times;
                     </span>
                 </div>
-                <div style={{marginBottom:'50px'}}>
+                <div style={{ marginBottom: '50px' }}>
                     {children}
                 </div>
 
                 <div className='modal-bottom'>
-                    <div className='btn glow-btn glow-btn-primary m-left-10' onClick={onClose}>
+                    <div className='btn glow-btn glow-btn-primary m-left-10' onClick={onSubmit}>
                         提交
                     </div>
                     <div className='btn glow-btn outline-glow-btn-secondary m-left-10' onClick={onClose}>
