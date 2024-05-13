@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent,useEffect } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import EaskeyTable from "@/component/EaskeyTable/EaskeyTable";
 import Modal from "@/component/Modal/Modal";
 import EaskeyFormRadio from "@/component/Form/EaskeyFormRadio";
@@ -6,10 +6,10 @@ import EaskeyFormInput from "@/component/Form/EaskeyFormInput";
 import Message, { MessagesProps } from '@/component/Message/Message';
 import EaskeyPopover from "@/component/Popover/EaskeyPopover"
 import IconGroup from "@/component/IconGroup/IconGroup";
-import { menuAdd,menuList } from "@/api/SysMenu/index"
+import { menuAdd, menuList } from "@/api/SysMenu/index"
 
 const SysMenu: React.FC = () => {
-    let [list,setList] = useState();
+    let [list, setList] = useState();
     let [isShowModal, setIsShowModal] = useState(false)
     let [showModalVal, setShowModalVal] = useState('')
     const [messages, setMessages] = useState<MessagesProps[]>([]);
@@ -25,11 +25,11 @@ const SysMenu: React.FC = () => {
 
     useEffect(() => {
         // 在组件挂载后立即请求接口
-        menuList().then((res)=>{
+        menuList().then((res) => {
             console.log(res)
             setList(res.data)
         })
-    }, []); 
+    }, []);
 
 
     const handleMenuNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -65,31 +65,31 @@ const SysMenu: React.FC = () => {
             title: '类型',
             dataIndex: '4',
             key: 'menuType',
-            renderingMethod:(row:any)=>{
-                if(row.menuType==='M'){
+            renderingMethod: (row: any) => {
+                if (row.menuType === 'M') {
                     return (
                         <div className="btn glow-btn glow-btn-success F-size-12">目录</div>
                     )
                 }
-                else if(row.menuType==='C'){
+                else if (row.menuType === 'C') {
                     return (
                         <div className="btn glow-btn glow-btn-info F-size-12">菜单</div>
                     )
                 }
-                else if(row.menuType==='F'){
+                else if (row.menuType === 'F') {
                     return (
                         <div className="btn glow-btn glow-btn-warning F-size-12">按钮</div>
                     )
                 }
 
-            } 
+            }
         },
         {
             title: '可见',
             dataIndex: '4',
             key: 'visible',
-            renderingMethod:(row:any)=>{
-                if(row.visible==='1'){
+            renderingMethod: (row: any) => {
+                if (row.visible === '1') {
                     return (
                         <div className="btn glow-btn glow-btn-success F-size-12">显示</div>
                     )
@@ -105,6 +105,15 @@ const SysMenu: React.FC = () => {
             title: '操作',
             dataIndex: '4',
             key: '',
+            renderingMethod: (row: any) => {
+                return (
+                    <div style={{display:'flex',flexDirection:'row'}}>
+                        <div className="btn glow-btn glow-btn-success F-size-12">新增</div>
+                        <div className="btn glow-btn glow-btn-warning F-size-12 m-left-10">编辑</div>
+                        <div className="btn glow-btn glow-btn-danger F-size-12 m-left-10">删除</div>
+                    </div>
+                )
+            }
         }
     ]
 
@@ -114,7 +123,7 @@ const SysMenu: React.FC = () => {
     }
 
     const hanldSubmitEvent = () => {
-        if(showModalVal === '添加菜单'){
+        if (showModalVal === '添加菜单') {
             let data = {
                 parentId: '',
                 menuType: menuTypeValue.key,
@@ -127,12 +136,12 @@ const SysMenu: React.FC = () => {
                 visible: menuStatusValue.key,
                 isRefresh: 0
             }
-            menuAdd(data).then((res:any )=> {
-                if(res.code===1){
-                    handleAddMessage(res.data,'success')
+            menuAdd(data).then((res: any) => {
+                if (res.code === 1) {
+                    handleAddMessage(res.data, 'success')
                 }
-                else{
-                    handleAddMessage(res.msg,'danger')
+                else {
+                    handleAddMessage(res.msg, 'danger')
                 }
             })
         }
