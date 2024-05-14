@@ -1,23 +1,37 @@
+/* 样式化表格 */
 table {
-    width: 100%;
     border-collapse: collapse;
+    width: 100%;
 }
 
-th,
-td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
+/* 表头样式 */
 th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+
+}
+
+/* 表格内容样式 */
+td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+/* 奇数行背景颜色 */
+tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+.toggle-button {
+    margin-left: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    line-height: 1;
 }
-
-tr:hover {
-    background-color: #ddd;
+.ident{
+    padding-left: 20px;
 }

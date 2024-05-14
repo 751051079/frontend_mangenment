@@ -8,6 +8,10 @@
 
 # 更新记录
 
+## 2024-05-14
+1.EaskeyTable 新增表格可以加载子集
+2.EaskeySelect 下拉框
+
 ## 2024-05-13
 1.EaskeyPopover 弹出层
 2.IconGroup Icon图标组件

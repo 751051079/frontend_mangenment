@@ -7,27 +7,34 @@ import Message, { MessagesProps } from '@/component/Message/Message';
 import EaskeyPopover from "@/component/Popover/EaskeyPopover"
 import IconGroup from "@/component/IconGroup/IconGroup";
 import { menuAdd, menuList } from "@/api/SysMenu/index"
+import { handleTree, TreeProps } from '@/utils/index'
+import EaskeySelect from "@/component/Form/EaskeySelect";
+
+
 
 const SysMenu: React.FC = () => {
-    let [list, setList] = useState();
+    let [list, setList] = useState<TreeProps<any>[]>([]);
     let [isShowModal, setIsShowModal] = useState(false)
     let [showModalVal, setShowModalVal] = useState('')
     const [messages, setMessages] = useState<MessagesProps[]>([]);
     const [nextId, setNextId] = useState(0);
     let [menuTypeValue, setMenuTypeValue] = useState({ value: '', key: '' })
     let [menuStatusValue, setMenuStatusValue] = useState({ value: '', key: '' })
-
+    const menuTypeOptions = [{ value: '目录', key: 'M' }, { value: '菜单', key: 'C' }, { value: '按钮', key: 'F' }]
+    const menuStatusOptions = [{ value: '显示', key: '1' }, { value: '隐藏', key: '0' }]
     let [menuNameValue, setMenuNameValue] = useState('');
     let [pathValue, setPathValue] = useState('');
     let [permsValue, setPermsValue] = useState('')
     let [orderNumValue, setOrderNumValue] = useState('')
     let [iconValue, setIconValue] = useState('')
+    const [expandedAll, setExpandedAll] = useState(false);
 
     useEffect(() => {
         // 在组件挂载后立即请求接口
         menuList().then((res) => {
-            console.log(res)
-            setList(res.data)
+
+            const menu = handleTree(res.data)
+            setList(menu)
         })
     }, []);
 
@@ -107,9 +114,9 @@ const SysMenu: React.FC = () => {
             key: '',
             renderingMethod: (row: any) => {
                 return (
-                    <div style={{display:'flex',flexDirection:'row'}}>
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
                         <div className="btn glow-btn glow-btn-success F-size-12">新增</div>
-                        <div className="btn glow-btn glow-btn-warning F-size-12 m-left-10">编辑</div>
+                        <div className="btn glow-btn glow-btn-warning F-size-12 m-left-10" onClick={() => setIsShowModalState('edit', row)}>编辑</div>
                         <div className="btn glow-btn glow-btn-danger F-size-12 m-left-10">删除</div>
                     </div>
                 )
@@ -117,7 +124,22 @@ const SysMenu: React.FC = () => {
         }
     ]
 
-    const setIsShowModalState = (type: string) => {
+    const setIsShowModalState = (type: string, row?: any) => {
+        if (type === 'add') {
+
+        }
+        else {
+            const foundMenuType = menuTypeOptions.find(item => item.key === row.menuType);
+            const foundMenuStatus = menuStatusOptions.find(item => item.key === row.status)
+            setMenuNameValue(row.menuName)
+            setMenuTypeValue(foundMenuType || { value: '', key: '' })
+            setPathValue(row.path)
+            setPermsValue(row.perms)
+            setOrderNumValue(row.orderNum)
+            setIconValue(row.icon)
+            setMenuStatusValue(foundMenuStatus || { value: '', key: '' })
+            console.log(row)
+        }
         setShowModalVal(type === 'add' ? '添加菜单' : '修改菜单')
         setIsShowModal(true)
     }
@@ -177,6 +199,9 @@ const SysMenu: React.FC = () => {
     const handleCloseMessage = (id: number) => {
         setMessages((prevMessages) => prevMessages.filter((message) => message.id !== id));
     };
+    const handleToggleAll = () => {
+        setExpandedAll(!expandedAll);
+    };
 
     return (
         <div className="container-div">
@@ -184,14 +209,14 @@ const SysMenu: React.FC = () => {
                 <div className="flex">
                     <div className="btn glow-btn glow-btn-primary" onClick={() => setIsShowModalState('add')}>新增</div>
                     <div className="btn glow-btn glow-btn-success m-left-10" onClick={() => setIsShowModalState('edit')}>修改</div>
-                    <div className="btn glow-btn glow-btn-info m-left-10">展开/折叠</div>
+                    <div className="btn glow-btn glow-btn-info m-left-10" onClick={handleToggleAll}>{expandedAll?'一键折叠':'一键展开'}</div>
                 </div>
 
-                <EaskeyTable style={{ marginTop: '10px' }} columns={columns} dataSource={list}></EaskeyTable>
+                <EaskeyTable style={{ marginTop: '10px' }} columns={columns} expandedAll={expandedAll} onToggleAll={handleToggleAll}  dataSource={list}></EaskeyTable>
             </div>
-            <Modal isOpen={isShowModal} title={showModalVal} onClose={() => setIsShowModal(false)} onSubmit={hanldSubmitEvent}>
+            <Modal isOpen={isShowModal} title={showModalVal} onClose={() => setIsShowModal(false)}onSubmit={hanldSubmitEvent}>
 
-                <EaskeyFormRadio labelStyle={{ width: '20%', textAlign: 'right' }} title="菜单类型：" options={[{ value: '目录', key: 'M' }, { value: '菜单', key: 'C' }, { value: '按钮', key: 'F' }]} defaultValue={menuTypeValue.value} onChange={(e) => hanldRadioTypeChange(e)} />
+                <EaskeyFormRadio labelStyle={{ width: '20%', textAlign: 'right' }} title="菜单类型：" options={menuTypeOptions} defaultValue={menuTypeValue.value} onChange={(e) => hanldRadioTypeChange(e)} />
                 <EaskeyFormInput labelStyle={{ width: '20%', textAlign: 'right' }} label="菜单名称：" value={menuNameValue} onChange={handleMenuNameChange} />
                 {['C'].includes(menuTypeValue.key) && (
                     <EaskeyFormInput labelStyle={{ width: '20%', textAlign: 'right' }} label="请求地址：" value={pathValue} onChange={handlePathChange} />
@@ -205,11 +230,12 @@ const SysMenu: React.FC = () => {
                         <IconGroup onClick={HanldClickIconEvent} />
                     </div>
                 </EaskeyPopover>
+                <EaskeySelect options={[{label:'新窗口',value:'0'},{label:'页签',value:'1'}]}></EaskeySelect>
                 {['M'].includes(menuTypeValue.key) && (
                     <EaskeyFormRadio
                         labelStyle={{ width: '20%', textAlign: 'right' }}
                         title="菜单状态："
-                        options={[{ value: '显示', key: '1' }, { value: '隐藏', key: '0' }]}
+                        options={menuStatusOptions}
                         defaultValue={menuStatusValue.value}
                         onChange={(e) => hanldRadioStatusChange(e)}
                     />
