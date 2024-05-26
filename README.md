@@ -11,6 +11,9 @@
 ## 2024-05-26
 1. 菜单改变
 2. FlipClock 时间翻转
+3. ImageUploadBase64 上传图片转Base64
+4. DragAndDropUploadImages 拖放上传转Base64
+5. MultiImageUpload 多文件上传转base64
 
 ## 2024-05-14
 1. EaskeyTable 新增表格可以加载子集

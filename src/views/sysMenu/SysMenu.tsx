@@ -210,6 +210,7 @@ const SysMenu: React.FC = () => {
                 }
             })
         }
+        setIsShowModal(false)
     }
 
     const hanldRadioTypeChange = (e: ChangeEvent<HTMLInputElement>) => {

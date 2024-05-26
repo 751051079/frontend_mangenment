@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import StarBackground from '@/component/LoginBackground/StarBackground';
 import EaskeyInput from '@/component/Form/EaskeyInput';
 import '@/assets/css/Login/index.css'
-import {getCaptcha,login} from '@/api/login'
+import { getCaptcha, login } from '@/api/login'
 import Message, { MessagesProps } from '@/component/Message/Message';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [captchaInput, setCaptchaInput] = useState('');
     const [captchaImages, setCaptchaImages] = useState('');
+    const [nextId, setNextId] = useState(0);
     const [messages, setMessages] = useState<MessagesProps[]>([]);
     const navigate = useNavigate();
 
@@ -18,7 +19,7 @@ const Login = () => {
         // 在组件加载时调用 getCaptcha
         const fetchData = async () => {
             try {
-                const captchaData:any = await getCaptcha();
+                const captchaData: any = await getCaptcha();
                 const url = URL.createObjectURL(captchaData);
                 setCaptchaImages(url)
                 console.log(url); // 处理获取到的数据
@@ -28,7 +29,7 @@ const Login = () => {
         };
 
         fetchData(); // 调用异步函数
-    }, []); 
+    }, []);
 
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
@@ -45,7 +46,7 @@ const Login = () => {
     const handleClickImgCaptchaChange = () => {
         const fetchData = async () => {
             try {
-                const captchaData:any = await getCaptcha();
+                const captchaData: any = await getCaptcha();
                 const url = URL.createObjectURL(captchaData);
                 setCaptchaImages(url)
                 console.log(url); // 处理获取到的数据
@@ -63,18 +64,29 @@ const Login = () => {
             console.log(1)
         }
         login({
-            username:username,
-            password:password,
-            captcha:captchaInput
-        }).then((res:any)=>{
-            if(res.code===1){
+            username: username,
+            password: password,
+            captcha: captchaInput
+        }).then((res: any) => {
+            if (res.code === 1) {
                 navigate('/layout');
+                localStorage.setItem('token', res.data);
+                handleAddMessage('登陆成功！','success')
             }
-            console.log(res)
+            else {
+                handleAddMessage(res.msg,'danger')
+            }
+
         })
         // console.log('Username:', username);
         // console.log('Password:', password);
         // console.log('Captcha:', captchaInput);
+    };
+
+    const handleAddMessage = (text: string, type: 'success' | 'danger' | 'warning' | 'info') => {
+        const newMessage = { id: nextId, text, type };
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+        setNextId((prevId) => prevId + 1);
     };
 
     const handleCloseMessage = (id: number) => {

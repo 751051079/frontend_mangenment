@@ -22,13 +22,7 @@ const Layout: React.FC = () => {
             children:[
                 {
                     title:'时间组件',
-                    path:'/layout/TimeComponents',
-                    children:[
-                        {
-                            title:'时间组件',
-                            path:'/layout/TimeComponents'
-                        },
-                    ]
+                    path:'/layout/TimeComponents'
                 },
                 {
                     title:'按钮组件',
@@ -49,7 +43,11 @@ const Layout: React.FC = () => {
                 {
                     title:'图片组件',
                     path:'/layout/ImagesComponents'
-                }
+                },
+                {
+                    title:'上传图片组件',
+                    path:'/layout/UploadImageBaseComponents'
+                },
             ]
         },
         

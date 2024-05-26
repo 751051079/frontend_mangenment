@@ -15,7 +15,7 @@ const Panel: React.FC<PanelProps> = ({ title, content, isActive, onToggle }) => 
                 <span style={{ fontSize: '14px' }}>{title}</span>
                 <span style={{ transition: 'transform 0.3s', transform: isActive ? 'rotate(180deg)' : 'rotate(0)', transformOrigin: '50% 50%', fontSize: '14px' }}>▲</span>
             </div>
-            <div className="panel-content" style={{ transition: 'max-height 0.3s', maxHeight: isActive ? '1000px' : '0', overflow: 'hidden', backgroundColor: 'white' }}>{content}</div>
+            <div className="panel-content" style={{ transition: 'max-height 0.3s', maxHeight: isActive ? '1000px' : '0', overflow: 'scroll', backgroundColor: 'white' }}>{content}</div>
         </div>
     );
 };

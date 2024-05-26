@@ -16,6 +16,10 @@ const request = axios.create({
 request.interceptors.request.use(
     (config: InternalAxiosRequestConfig<any>) => {
         const headers = config.headers as CustomHeaders;
+        const token = localStorage.getItem('token');
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
         headers['Content-type'] = 'application/json; charset=utf-8';
         headers['Access-Control-Allow-Origin'] = '*';
         return config;
@@ -28,7 +32,7 @@ request.interceptors.request.use(
 // 响应拦截器
 request.interceptors.response.use(
     (response: any) => {
-        console.log(response);
+        // console.log(response);
         const { status } = response;
         if (status !== 200) {
             return;

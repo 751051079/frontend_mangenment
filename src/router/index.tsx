@@ -12,6 +12,7 @@ import ImagesComponents from '@/views/ComponentsShow/ImagesComponents';
 import GridComponents from '@/views/ComponentsShow/GridComponents';
 import TableComponents from '@/views/ComponentsShow/TableComponents';
 import AlertComponents from '@/views/ComponentsShow/AlertComponents';
+import UploadImageBaseComponents from "@/views/ComponentsShow/UploadImageBaseComponents"
 
 
 // 主路管理
@@ -45,6 +46,9 @@ export const appRouter: RouteObject[] = [
             },
             {
                 path:"AlertComponents",element:<AlertComponents/>,meta:{title:'弹窗组件'}
+            },
+            {
+                path:"UploadImageBaseComponents",element:<UploadImageBaseComponents/>,meta:{title:'上传图片组件'}
             }
         ]
     },
