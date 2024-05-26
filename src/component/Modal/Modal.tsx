@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, title = '标题', onSubmit, onClo
                         &times;
                     </span>
                 </div>
-                <div style={{ marginBottom: '50px' }}>
+                <div style={{overflowY:'scroll',maxHeight:'430px'}}>
                     {children}
                 </div>
 

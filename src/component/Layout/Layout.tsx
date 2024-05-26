@@ -18,7 +18,39 @@ const Layout: React.FC = () => {
         },
         {
             title: '自定义组件',
-            path: '/layout/customComponents'
+            path: '#',
+            children:[
+                {
+                    title:'时间组件',
+                    path:'/layout/TimeComponents',
+                    children:[
+                        {
+                            title:'时间组件',
+                            path:'/layout/TimeComponents'
+                        },
+                    ]
+                },
+                {
+                    title:'按钮组件',
+                    path:'/layout/ButtonComponents'
+                },
+                {
+                    title:'弹窗组件',
+                    path:'/layout/AlertComponents'
+                },
+                {
+                    title:'栅格组件',
+                    path:'/layout/GridComponents'
+                },
+                {
+                    title:'表格组件',
+                    path:'/layout/TableComponents'
+                },
+                {
+                    title:'图片组件',
+                    path:'/layout/ImagesComponents'
+                }
+            ]
         },
         
     ];

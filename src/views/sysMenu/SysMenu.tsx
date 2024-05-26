@@ -6,29 +6,42 @@ import EaskeyFormInput from "@/component/Form/EaskeyFormInput";
 import Message, { MessagesProps } from '@/component/Message/Message';
 import EaskeyPopover from "@/component/Popover/EaskeyPopover"
 import IconGroup from "@/component/IconGroup/IconGroup";
-import { menuAdd, menuList } from "@/api/SysMenu/index"
+import { menuAdd, menuList, menuEdit } from "@/api/SysMenu/index"
 import { handleTree, TreeProps } from '@/utils/index'
 import EaskeySelect from "@/component/Form/EaskeySelect";
+import {
+    isVisibleOptions,
+    // isYseNoOptions,
+    isCacheOptions,
+    isYseNoSelects,
+    isStatusOptions,
+    isMenuTypeOptions
+} from '@/utils/data'
 
 
 
 const SysMenu: React.FC = () => {
-    let [list, setList] = useState<TreeProps<any>[]>([]);
-    let [isShowModal, setIsShowModal] = useState(false)
-    let [showModalVal, setShowModalVal] = useState('')
+    const [list, setList] = useState<TreeProps<any>[]>([]);
+    const [isShowModal, setIsShowModal] = useState(false)
+    const [showModalVal, setShowModalVal] = useState('')
     const [messages, setMessages] = useState<MessagesProps[]>([]);
     const [nextId, setNextId] = useState(0);
-    let [menuTypeValue, setMenuTypeValue] = useState({ value: '', key: '' })
-    let [menuStatusValue, setMenuStatusValue] = useState({ value: '', key: '' })
-    const menuTypeOptions = [{ value: '目录', key: 'M' }, { value: '菜单', key: 'C' }, { value: '按钮', key: 'F' }]
-    const menuStatusOptions = [{ value: '显示', key: '1' }, { value: '隐藏', key: '0' }]
-    let [menuNameValue, setMenuNameValue] = useState('');
-    let [pathValue, setPathValue] = useState('');
-    let [permsValue, setPermsValue] = useState('')
-    let [orderNumValue, setOrderNumValue] = useState('')
-    let [iconValue, setIconValue] = useState('')
-    const [expandedAll, setExpandedAll] = useState(false);
+    const [menuTypeValue, setMenuTypeValue] = useState({ value: '', key: '' })
+    const [menuStatusValue, setMenuStatusValue] = useState({ value: '', key: '' })
+    const [menuIsCache, setmMnuIsCache] = useState({ value: '', key: '' })
+    const [isVisible, setIsVisible] = useState({ value: '', key: '' })
 
+    const [componentValue, setComponentValue] = useState('')
+    const [queryValue, setQueryValue] = useState('')
+    const [menuNameValue, setMenuNameValue] = useState('');
+    const [pathValue, setPathValue] = useState('');
+    const [permsValue, setPermsValue] = useState('')
+    const [orderNumValue, setOrderNumValue] = useState('')
+    const [iconValue, setIconValue] = useState('')
+    const [expandedAll, setExpandedAll] = useState(false);
+    const [targetValue, setTargetValue] = useState('');
+    const [parentIdValue, setParentIdValue] = useState('');
+    const [id,setId] = useState('')
     useEffect(() => {
         // 在组件挂载后立即请求接口
         menuList().then((res) => {
@@ -51,6 +64,14 @@ const SysMenu: React.FC = () => {
     const handleOrderNumChange = (event: ChangeEvent<HTMLInputElement>) => {
         setOrderNumValue(event.target.value);
     };
+    const handleComponentChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setComponentValue(event.target.value);
+    };
+    const handleQueryVChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setQueryValue(event.target.value);
+    };
+
+
 
     let columns = [
         {
@@ -126,39 +147,61 @@ const SysMenu: React.FC = () => {
 
     const setIsShowModalState = (type: string, row?: any) => {
         if (type === 'add') {
-
+            setParentIdValue('')
+            setId('')
         }
         else {
-            const foundMenuType = menuTypeOptions.find(item => item.key === row.menuType);
-            const foundMenuStatus = menuStatusOptions.find(item => item.key === row.status)
+            const foundMenuType = isMenuTypeOptions.find(item => item.key === row.menuType);
+            const foundMenuStatus = isStatusOptions.find(item => item.key === row.status)
+            const foundIsVisible = isVisibleOptions.find(item => item.key === row.visible)
+            const foundTargetValue = isYseNoSelects.find(item => item.value === String(row.isFrame))
+            const foundIsCache = isCacheOptions.find(item => item.key === row.isCache)
+            setId(row.id)
             setMenuNameValue(row.menuName)
             setMenuTypeValue(foundMenuType || { value: '', key: '' })
             setPathValue(row.path)
             setPermsValue(row.perms)
+            setComponentValue(row.component)
+            setQueryValue(row.query)
+            setmMnuIsCache(foundIsCache || { value: '', key: '' })
             setOrderNumValue(row.orderNum)
             setIconValue(row.icon)
+            setTargetValue(foundTargetValue?.value || '')
             setMenuStatusValue(foundMenuStatus || { value: '', key: '' })
-            console.log(row)
+            setIsVisible(foundIsVisible || { value: '', key: '' })
         }
         setShowModalVal(type === 'add' ? '添加菜单' : '修改菜单')
         setIsShowModal(true)
     }
 
     const hanldSubmitEvent = () => {
+        let data = {
+            id:id,
+            parentId: parentIdValue,
+            menuType: menuTypeValue.key,
+            menuName: menuNameValue,
+            path: pathValue,
+            isFrame: targetValue,
+            perms: permsValue,
+            orderNum: orderNumValue,
+            icon: iconValue,
+            query: queryValue,
+            status: menuStatusValue.key,
+            visible: isVisible.key,
+            isCache: menuIsCache.key
+        }
         if (showModalVal === '添加菜单') {
-            let data = {
-                parentId: '',
-                menuType: menuTypeValue.key,
-                menuName: menuNameValue,
-                url: pathValue,
-                target: 'menuItem',
-                perms: permsValue,
-                orderNum: orderNumValue,
-                icon: iconValue,
-                visible: menuStatusValue.key,
-                isRefresh: 0
-            }
             menuAdd(data).then((res: any) => {
+                if (res.code === 1) {
+                    handleAddMessage(res.data, 'success')
+                }
+                else {
+                    handleAddMessage(res.msg, 'danger')
+                }
+            })
+        }
+        else {
+            menuEdit(data).then((res: any) => {
                 if (res.code === 1) {
                     handleAddMessage(res.data, 'success')
                 }
@@ -186,6 +229,23 @@ const SysMenu: React.FC = () => {
         console.log(data)
     }
 
+    const hanldIsVisibleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        let data = {
+            value: e.target.value,
+            key: e.currentTarget.getAttribute('data-keys') || ''
+        }
+        setIsVisible(data)
+        console.log(data)
+    }
+    const hanldMnuIsCacheChange = (e: ChangeEvent<HTMLInputElement>) => {
+        let data = {
+            value: e.target.value,
+            key: e.currentTarget.getAttribute('data-keys') || ''
+        }
+        setmMnuIsCache(data)
+        console.log(data)
+    }
+
     const HanldClickIconEvent = (e: string) => {
         setIconValue(e)
     }
@@ -203,26 +263,40 @@ const SysMenu: React.FC = () => {
         setExpandedAll(!expandedAll);
     };
 
+    const handleTargetValue = (option: any) => {
+        console.log(option)
+        setTargetValue(option.value)
+    }
+
     return (
         <div className="container-div">
             <div style={{ backgroundColor: '#fff', padding: '20px 10px', marginTop: '10px' }}>
                 <div className="flex">
                     <div className="btn glow-btn glow-btn-primary" onClick={() => setIsShowModalState('add')}>新增</div>
                     <div className="btn glow-btn glow-btn-success m-left-10" onClick={() => setIsShowModalState('edit')}>修改</div>
-                    <div className="btn glow-btn glow-btn-info m-left-10" onClick={handleToggleAll}>{expandedAll?'一键折叠':'一键展开'}</div>
+                    <div className="btn glow-btn glow-btn-info m-left-10" onClick={handleToggleAll}>{expandedAll ? '一键折叠' : '一键展开'}</div>
                 </div>
 
-                <EaskeyTable style={{ marginTop: '10px' }} columns={columns} expandedAll={expandedAll} onToggleAll={handleToggleAll}  dataSource={list}></EaskeyTable>
+                <EaskeyTable style={{ marginTop: '10px' }} columns={columns} expandedAll={expandedAll} onToggleAll={handleToggleAll} dataSource={list}></EaskeyTable>
             </div>
-            <Modal isOpen={isShowModal} title={showModalVal} onClose={() => setIsShowModal(false)}onSubmit={hanldSubmitEvent}>
+            <Modal isOpen={isShowModal} title={showModalVal} onClose={() => setIsShowModal(false)} onSubmit={hanldSubmitEvent}>
 
-                <EaskeyFormRadio labelStyle={{ width: '20%', textAlign: 'right' }} title="菜单类型：" options={menuTypeOptions} defaultValue={menuTypeValue.value} onChange={(e) => hanldRadioTypeChange(e)} />
+                <EaskeyFormRadio labelStyle={{ width: '20%', textAlign: 'right' }} title="菜单类型：" options={isMenuTypeOptions} defaultValue={menuTypeValue.value} onChange={(e) => hanldRadioTypeChange(e)} />
                 <EaskeyFormInput labelStyle={{ width: '20%', textAlign: 'right' }} label="菜单名称：" value={menuNameValue} onChange={handleMenuNameChange} />
-                {['C'].includes(menuTypeValue.key) && (
-                    <EaskeyFormInput labelStyle={{ width: '20%', textAlign: 'right' }} label="请求地址：" value={pathValue} onChange={handlePathChange} />
+                {['C', 'M'].includes(menuTypeValue.key) && (
+                    <EaskeyFormInput labelStyle={{ width: '20%', textAlign: 'right' }} label="路由地址：" value={pathValue} onChange={handlePathChange} />
+                )}
+                {['C', 'M'].includes(menuTypeValue.key) && (
+                    <EaskeySelect lable={'是否外链：'} options={isYseNoSelects} defaultValue={targetValue} onChange={handleTargetValue}></EaskeySelect>
                 )}
                 {['C', 'F'].includes(menuTypeValue.key) && (
-                    <EaskeyFormInput labelStyle={{ width: '20%', textAlign: 'right' }} label="权限标识：" value={permsValue} onChange={handlePermsChange} />
+                    <EaskeyFormInput labelStyle={{ width: '20%', textAlign: 'right' }} label="权限字符：" value={permsValue} onChange={handlePermsChange} />
+                )}
+                {['C'].includes(menuTypeValue.key) && (
+                    <EaskeyFormInput labelStyle={{ width: '20%', textAlign: 'right' }} label="组件地址：" value={componentValue} onChange={handleComponentChange} />
+                )}
+                {['C'].includes(menuTypeValue.key) && (
+                    <EaskeyFormInput labelStyle={{ width: '20%', textAlign: 'right' }} label="路由参数：" value={queryValue} onChange={handleQueryVChange} />
                 )}
                 <EaskeyFormInput labelStyle={{ width: '20%', textAlign: 'right' }} label="显示排序：" value={orderNumValue} onChange={handleOrderNumChange} />
                 <EaskeyPopover title="点击选择图标" content={<EaskeyFormInput labelStyle={{ width: '20%', textAlign: 'right' }} label="图标：" value={iconValue} onChange={() => { }} />}>
@@ -230,12 +304,30 @@ const SysMenu: React.FC = () => {
                         <IconGroup onClick={HanldClickIconEvent} />
                     </div>
                 </EaskeyPopover>
-                <EaskeySelect options={[{label:'新窗口',value:'0'},{label:'页签',value:'1'}]}></EaskeySelect>
-                {['M'].includes(menuTypeValue.key) && (
+
+                {['M', 'C'].includes(menuTypeValue.key) && (
+                    <EaskeyFormRadio
+                        labelStyle={{ width: '20%', textAlign: 'right' }}
+                        title="显示状态："
+                        options={isVisibleOptions}
+                        defaultValue={isVisible.value}
+                        onChange={(e) => hanldIsVisibleChange(e)}
+                    />
+                )}
+                {['C'].includes(menuTypeValue.key) && (
+                    <EaskeyFormRadio
+                        labelStyle={{ width: '20%', textAlign: 'right' }}
+                        title="是否缓存："
+                        options={isCacheOptions}
+                        defaultValue={menuStatusValue.value}
+                        onChange={(e) => hanldMnuIsCacheChange(e)}
+                    />
+                )}
+                {['M', 'C', 'F'].includes(menuTypeValue.key) && (
                     <EaskeyFormRadio
                         labelStyle={{ width: '20%', textAlign: 'right' }}
                         title="菜单状态："
-                        options={menuStatusOptions}
+                        options={isStatusOptions}
                         defaultValue={menuStatusValue.value}
                         onChange={(e) => hanldRadioStatusChange(e)}
                     />
@@ -244,6 +336,7 @@ const SysMenu: React.FC = () => {
             {messages && <Message message={messages} onClose={handleCloseMessage} />}
         </div>
     )
+
 }
 
 export default SysMenu;

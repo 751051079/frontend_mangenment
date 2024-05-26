@@ -5,8 +5,13 @@ import { RouteObject } from "./interface/index"
 import Login from "@/views/Login"
 import Layout from '@/component/Layout/Layout';
 import Home from '@/views/Home';
-import CustomComponents from '@/views/CustomComponents/CustomComponents';
 import SysMenu from '@/views/sysMenu/SysMenu';
+import TimeComponents from '@/views/ComponentsShow/TimeComponents';
+import ButtonComponents from '@/views/ComponentsShow/ButonnComponents';
+import ImagesComponents from '@/views/ComponentsShow/ImagesComponents';
+import GridComponents from '@/views/ComponentsShow/GridComponents';
+import TableComponents from '@/views/ComponentsShow/TableComponents';
+import AlertComponents from '@/views/ComponentsShow/AlertComponents';
 
 
 // 主路管理
@@ -21,10 +26,25 @@ export const appRouter: RouteObject[] = [
                 path: "", element: <Home />, meta: { title: "首页" }
             },
             {
-                path: "customComponents", element: <CustomComponents />, meta: { title: "自定义组件" }
+                path:"SysMenu",element:<SysMenu/>,meta:{title:'菜单管理'}
             },
             {
-                path:"SysMenu",element:<SysMenu/>,meta:{title:'菜单管理'}
+                path:"TimeComponents",element:<TimeComponents/>,meta:{title:'时间组件'}
+            },
+            {
+                path:"ButtonComponents",element:<ButtonComponents/>,meta:{title:'按钮组件'}
+            },
+            {
+                path:"ImagesComponents",element:<ImagesComponents/>,meta:{title:'图片组件'}
+            },
+            {
+                path:"GridComponents",element:<GridComponents/>,meta:{title:'栅格组件'}
+            },
+            {
+                path:"TableComponents",element:<TableComponents/>,meta:{title:'表格组件'}
+            },
+            {
+                path:"AlertComponents",element:<AlertComponents/>,meta:{title:'弹窗组件'}
             }
         ]
     },

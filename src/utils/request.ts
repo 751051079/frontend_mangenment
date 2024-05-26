@@ -8,7 +8,7 @@ interface CustomHeaders {
 // 创建 axios 实例
 const request = axios.create({
     baseURL: 'http://localhost:8090', // 用于配置请求接口公用部分，请求时会自动拼接在你定义的url前面。
-    withCredentials: false, // 跨域请求时是否需要访问凭证
+    withCredentials: true, // 跨域请求时是否需要访问凭证
     timeout: 3 * 1000, // 请求超时时间
 });
 
@@ -28,7 +28,7 @@ request.interceptors.request.use(
 // 响应拦截器
 request.interceptors.response.use(
     (response: any) => {
-        // console.log(response);
+        console.log(response);
         const { status } = response;
         if (status !== 200) {
             return;
