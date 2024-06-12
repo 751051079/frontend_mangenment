@@ -1,3 +1,10 @@
+
+export interface responseType{
+    code:number;
+    data:string;
+    map:Object;
+    msg:string
+}
 export interface MenuItem {
     title: string;
     path: string;

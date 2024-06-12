@@ -53,7 +53,7 @@ const StarBackground: React.FC = () => {
     draw();
 
     return () => {
-      cancelAnimationFrame(draw);
+      cancelAnimationFrame(draw as any);
     };
   }, []);
 
