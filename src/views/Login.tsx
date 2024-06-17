@@ -68,7 +68,7 @@ const Login = () => {
             password: password,
             captcha: captchaInput
         }).then((res: any) => {
-            if (res.code === 1) {
+            if (res.code === 200) {
                 navigate('/layout');
                 localStorage.setItem('token', res.data);
                 handleAddMessage('登陆成功！','success')

@@ -13,8 +13,8 @@ const Layout: React.FC = () => {
             path: '',
         },
         {
-            title:'菜单管理',
-            path:'/layout/SysMenu'
+            title: '分类管理',
+            path: '/layout/category',
         },
         {
             title: '自定义组件',

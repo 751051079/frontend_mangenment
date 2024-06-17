@@ -5,7 +5,6 @@ import { RouteObject } from "./interface/index"
 import Login from "@/views/Login"
 import Layout from '@/component/Layout/Layout';
 import Home from '@/views/Home';
-import SysMenu from '@/views/sysMenu/SysMenu';
 import TimeComponents from '@/views/ComponentsShow/TimeComponents';
 import ButtonComponents from '@/views/ComponentsShow/ButonnComponents';
 import ImagesComponents from '@/views/ComponentsShow/ImagesComponents';
@@ -13,11 +12,11 @@ import GridComponents from '@/views/ComponentsShow/GridComponents';
 import TableComponents from '@/views/ComponentsShow/TableComponents';
 import AlertComponents from '@/views/ComponentsShow/AlertComponents';
 import UploadImageBaseComponents from "@/views/ComponentsShow/UploadImageBaseComponents"
-
+import CategoryPage from '@/views/Category/CategoryPage';
 
 // 主路管理
 export const appRouter: RouteObject[] = [
-    { path: "/", element: <Navigate to="/login" replace /> },
+    { path: "/", element: <Navigate to="/layout" replace /> },
     { path: "/login", meta: { title: "登录" }, element: <Login /> },
     {
         path: "/layout/",
@@ -27,7 +26,7 @@ export const appRouter: RouteObject[] = [
                 path: "", element: <Home />, meta: { title: "首页" }
             },
             {
-                path:"SysMenu",element:<SysMenu/>,meta:{title:'菜单管理'}
+                path: "category", element: <CategoryPage />, meta: { title: "分类页面" }
             },
             {
                 path:"TimeComponents",element:<TimeComponents/>,meta:{title:'时间组件'}
@@ -52,7 +51,7 @@ export const appRouter: RouteObject[] = [
             }
         ]
     },
-    { path: "*", meta: { title: "登录" }, element: <Login /> },
+    { path: "*", meta: { title: "登录" }, element: <Layout /> },
 
 ];
 
