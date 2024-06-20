@@ -100,10 +100,10 @@ const CategoryPage: React.FC = () => {
             render: (_: any, category: Category) => (
                 <>
                     <Button type="link" onClick={() => handleEdit(category)}>
-                        Edit
+                        修改
                     </Button>
                     <Button type="link" danger onClick={() => handleDelete(category.id)}>
-                        Delete
+                        删除
                     </Button>
                 </>
             ),
@@ -113,7 +113,7 @@ const CategoryPage: React.FC = () => {
     return (
         <div>
             <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-                Add Category
+                添加分类
             </Button>
             <Table
                 columns={columns}
@@ -123,7 +123,7 @@ const CategoryPage: React.FC = () => {
                 style={{ marginTop: 16 }}
             />
             <Modal
-                title={editingCategory ? 'Edit Category' : 'Add Category'}
+                title={editingCategory ? '修改分类' : '添加分类'}
                 open={isModalVisible}
                 onOk={handleOk}
                 onCancel={handleCancel}

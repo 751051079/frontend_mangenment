@@ -1,8 +1,8 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
-interface CustomHeaders {
-    [key: string]: string;
-}
+// interface CustomHeaders {
+//     [key: string]: string;
+// }
 
 
 // 创建 axios 实例
@@ -15,13 +15,13 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use(
     (config: InternalAxiosRequestConfig<any>) => {
-        const headers = config.headers as CustomHeaders;
         const token = localStorage.getItem('token');
         if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
+            config.headers.Authorization = `Bearer ${token}`;
+        
         }
-        headers['Content-type'] = 'application/json; charset=utf-8';
-        headers['Access-Control-Allow-Origin'] = '*';
+        // config.headers['Access-Control-Allow-Origin'] = '*';
+        config.headers['Content-Type'] = 'application/json; charset=utf-8';
         return config;
     },
     (error) => {
