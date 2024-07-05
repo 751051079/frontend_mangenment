@@ -17,6 +17,10 @@ const Layout: React.FC = () => {
             path: '/layout/category',
         },
         {
+            title:"菜谱管理",
+            path:"/layout/recipe"
+        },
+        {
             title: '自定义组件',
             path: '#',
             children:[

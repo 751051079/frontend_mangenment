@@ -13,6 +13,8 @@ import TableComponents from '@/views/ComponentsShow/TableComponents';
 import AlertComponents from '@/views/ComponentsShow/AlertComponents';
 import UploadImageBaseComponents from "@/views/ComponentsShow/UploadImageBaseComponents"
 import CategoryPage from '@/views/Category/CategoryPage';
+import RecipeManagement from '@/views/RecipeManagement/RecipeManagement';
+import RecipeSteps from "@/views/RecipeManagement/RecipeSteps"
 
 // 主路管理
 export const appRouter: RouteObject[] = [
@@ -27,6 +29,12 @@ export const appRouter: RouteObject[] = [
             },
             {
                 path: "category", element: <CategoryPage />, meta: { title: "分类页面" }
+            },
+            {
+                path:"recipe",element:<RecipeManagement />,meta:{title:"菜谱页面"}
+            },
+            {
+                path:"recipeSteps/:id",element:<RecipeSteps />,meta:{title:"菜谱关联步骤页面"}
             },
             {
                 path:"TimeComponents",element:<TimeComponents/>,meta:{title:'时间组件'}

@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-import {Recipe} from "@/utils/type"
+import {Seasoning} from "@/utils/type"
 
 
 /**
@@ -7,7 +7,7 @@ import {Recipe} from "@/utils/type"
  * @param data 
  * @returns 
  */
- export function createRecipe(data: Recipe) {
+ export function createRecipe(data: Seasoning) {
     return request({
         method: 'post',
         url: '/api/recipes',
@@ -47,7 +47,7 @@ export function getRecipeAll(params = {}) {
  * @param data 
  * @returns 
  */
-export function updateRecipeById(id: number, data: Recipe) {
+export function updateRecipeById(id: number, data: Seasoning) {
     return request({
         method: 'post',
         url: '/api/recipes/update/' + id,

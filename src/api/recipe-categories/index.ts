@@ -1,26 +1,41 @@
 import request from "@/utils/request";
+import { RecipeCategory } from "@/utils/type"
 
 /**
- * get请求方法
- * @param {Object} params
+ * 将菜谱添加到分类
+ * @param data 
+ * @returns 
  */
-// export function getorderInfo(params = {}) {
-//     return request({
-//         method: 'get',
-//         url: '/getOrderInfo',
-//         params
-//     })
-// }
+export function createRecipeCategory(data: RecipeCategory) {
+    return request({
+        method: 'post',
+        url: '/api/recipe-categories',
+        data: data
+    })
+}
 
 
 /**
- * post请求
- * @param {Object} data
+ *  获取分类的所有菜谱
+ * @returns 
  */
-// export function login(data) {
-// 	return request({
-// 		method: 'post',
-// 		url: '/api/Login/GetToken',
-// 		data: data //可以简写为data
-// 	})
-// }
+export function getRecipeCategoryAll(id: number, params = {}) {
+    return request({
+        method: 'get',
+        url: '/api/recipe-categories/category/' + id,
+        params
+    })
+}
+
+
+/**
+ * 从分类中移除菜谱
+ * @param id 
+ * @returns 
+ */
+export function removeRecipeCategoryById(id: number) {
+    return request({
+        method: 'post',
+        url: '/api/recipe-categories/delete/' + id
+    })
+}
