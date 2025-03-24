@@ -21,11 +21,14 @@ const Menu: React.FC<MenuProps> = ({ items, className, style }) => {
     <ul className={`nav-item ${className || ''}`} style={style}>
       {items.map((item, index) => (
         <li key={index} onClick={(e) => { handleClickMenu(index, e); }}>
-          <Link to={item.path}>{item.title}</Link>
-          {/* 递归调用 Menu 组件，渲染子菜单 */}
-          {item.children && item.children.length > 0 && (
-            <Menu items={item.children} className={`sub-menu-${index + 1}`} style={{ height: activeSubMenu === index ? 'auto' : '0' }} />
-          )}
+          <div>
+            <Link to={item.path}>{item.title}</Link>
+            {/* 递归调用 Menu 组件，渲染子菜单 */}
+            {item.children && item.children.length > 0 && (
+              <Menu items={item.children} className={`sub-menu-${index + 1}`} style={{ height: activeSubMenu === index ? 'auto' : '0' }} />
+            )}
+          </div>
+
         </li>
       ))}
     </ul>
